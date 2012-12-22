@@ -62,11 +62,11 @@
 <samp>(2005, 5, 9, 9, 49, 29, 0, 129, -1)</samp>
 >>> d["headers"]
 <samp>{'transfer-encoding': 'chunked', 'vary': '*',
-	'server': 'Apache/1.3.33 (Debian GNU/Linux) 
-		mod_gzip/1.3.26.1a mod_perl/1.29 
+	'server': 'Apache/1.3.33 (Debian GNU/Linux)
+		mod_gzip/1.3.26.1a mod_perl/1.29
 		AuthMySQL/4.3.9-2',
-	'connection': 'close', 
-	'date': 'Mon, 09 May 2005 12:14:22 GMT', 
+	'connection': 'close',
+	'date': 'Mon, 09 May 2005 12:14:22 GMT',
 	'content-type': 'text/plain'}</samp>
 >>> d["tags"]
 <samp>[{u'count': 1, u'name': u'aggregation'},
@@ -82,60 +82,60 @@
 <samp>[{u'count': 1, u'name': u'aggregation'},
 	{u'count': 2, u'name': u'ajax'}]</samp>
 >>> d["dates"]
-<samp>[{u'count': 2, u'date': u'2005-05-08', 
+<samp>[{u'count': 2, u'date': u'2005-05-08',
 		u'date_parsed': (2005, 5, 8, 0, 0, 0, 6, 128, -1)},
-	{u'count': 8, u'date': u'2005-05-07', 
-		u'date_parsed': (2005, 5, 7, 0, 0, 0, 5, 127, -1)}, 
-	{u'count': 5, u'date': u'2005-05-06', 
+	{u'count': 8, u'date': u'2005-05-07',
+		u'date_parsed': (2005, 5, 7, 0, 0, 0, 5, 127, -1)},
+	{u'count': 5, u'date': u'2005-05-06',
 		u'date_parsed': (2005, 5, 6, 0, 0, 0, 4, 126, -1)},
-	{u'count': 8, u'date': u'2005-05-05', 
-		u'date_parsed': (2005, 5, 5, 0, 0, 0, 3, 125, -1)}, 
-	{u'count': 3, u'date': u'2005-05-04', 
+	{u'count': 8, u'date': u'2005-05-05',
+		u'date_parsed': (2005, 5, 5, 0, 0, 0, 3, 125, -1)},
+	{u'count': 3, u'date': u'2005-05-04',
 		u'date_parsed': (2005, 5, 4, 0, 0, 0, 2, 124, -1)}]</samp>
 >>> d["posts"][:2]
-<samp>[{u'extended': u'For when I get back home', 
-		u'hash': u'5fe05afcfc229db0d6cbcb1cbdda71cf', 
-		u'description': u'Bonjour for Windows', 
-		u'tags': [u'apple', u'windows'], 
-		u'time_parsed': (2005, 5, 8, 18, 16, 1, 6, 128, -1), 
-		u'href': u'http://www.apple.com/', 
+<samp>[{u'extended': u'For when I get back home',
+		u'hash': u'5fe05afcfc229db0d6cbcb1cbdda71cf',
+		u'description': u'Bonjour for Windows',
+		u'tags': [u'apple', u'windows'],
+		u'time_parsed': (2005, 5, 8, 18, 16, 1, 6, 128, -1),
+		u'href': u'http://www.apple.com/',
 		u'time': u'2005-05-08T18:16:01Z'},
 	{u'hash': u'170322ad5668143742efef335a334da5',
-		u'description': u'Matthew Thomas', 
-		u'tags': [u'usability'], 
-		u'time_parsed': (2005, 5, 7, 13, 27, 46, 5, 127, -1), 
-		u'href': u'http://mpt.net.nz/', 
+		u'description': u'Matthew Thomas',
+		u'tags': [u'usability'],
+		u'time_parsed': (2005, 5, 7, 13, 27, 46, 5, 127, -1),
+		u'href': u'http://mpt.net.nz/',
 		u'time': u'2005-05-07T13:27:46Z'}]</samp>
 >>> d.posts(<var>tag</var>=<kbd>"usability"</kbd>)
-<samp>[{u'hash': u'170322ad5668143742efef335a334da5', 
-		u'description': u'Matthew Thomas', 
-		u'tags': [u'usability'], 
-		u'time_parsed': (2005, 5, 7, 13, 27, 46, 5, 127, -1), 
-		u'href': u'http://mpt.net.nz/', 
+<samp>[{u'hash': u'170322ad5668143742efef335a334da5',
+		u'description': u'Matthew Thomas',
+		u'tags': [u'usability'],
+		u'time_parsed': (2005, 5, 7, 13, 27, 46, 5, 127, -1),
+		u'href': u'http://mpt.net.nz/',
 		u'time': u'2005-05-07T13:27:46Z'},
-	{u'extended': u'I bookmark this because Matthew Thomas 
+	{u'extended': u'I bookmark this because Matthew Thomas
 			(aka mpt) is working on it',
-		u'hash': u'eb1242cfeed2dd9d2e1250bde26ad749', 
-		u'description': u'The Launchpad Home Page', 
-		u'tags': [u'usability'], 
-		u'time_parsed': (2005, 5, 7, 13, 26, 45, 5, 127, -1), 
-		u'href': u'https://launchpad.ubuntu.com/', 
+		u'hash': u'eb1242cfeed2dd9d2e1250bde26ad749',
+		u'description': u'The Launchpad Home Page',
+		u'tags': [u'usability'],
+		u'time_parsed': (2005, 5, 7, 13, 26, 45, 5, 127, -1),
+		u'href': u'https://launchpad.ubuntu.com/',
 		u'time': u'2005-05-07T13:26:45Z'}]</samp>
 >>> d.posts(<var>tag</var>=<kbd>"computing"</kbd>, <var>count</var>=<kbd>1</kbd>)
 <samp>[{u'hash': u'd78a1aa1a086dd475f83691febcc61ba',
-	u'description': u'CSS Cheat Sheet', 
-	u'tags': [u'reference', u'computing'], 
-	u'time_parsed': (2005, 5, 6, 9, 41, 33, 4, 126, -1), 
-	u'href': u'http://www.ilovejackdaniels.com/css/', 
+	u'description': u'CSS Cheat Sheet',
+	u'tags': [u'reference', u'computing'],
+	u'time_parsed': (2005, 5, 6, 9, 41, 33, 4, 126, -1),
+	u'href': u'http://www.ilovejackdaniels.com/css/',
 	u'time': u'2005-05-06T09:41:33Z'}]</samp>
 	-->
 >>> p.add(<kbd>'https://github.com/mgan59/python-pinboard/'</kbd>,
 	<kbd>"Python-Pinboard"</kbd>,
-	<kbd>"A Python module to access the contents of a 
-		Pinboard account via the Pinboard API."</kbd>, 
-		<kbd>("computing", "python")</kbd>)         
+	<kbd>"A Python module to access the contents of a
+		Pinboard account via the Pinboard API."</kbd>,
+		<kbd>("computing", "python")</kbd>)
 >>> p.add(<kbd>'https://github.com/mgan59/python-pinboard'</kbd>,
-	<kbd>"Python-Pinboard"</kbd>, 
+	<kbd>"Python-Pinboard"</kbd>,
 	<var>tags</var>=<kbd>("computing", "python", "projects")</kbd>)
 >>> p.delete(<kbd>"https://github.com/mgan59/python-pinboard"</kbd>)</code></pre>
 	</div>
@@ -365,7 +365,7 @@ p["lastupdate_parsed"]</code></pre>
 			</div>
 			<div id="add">
 				<h4>Add (and Edit) Posts</h4>
-				<pre><code>p.add(<var>url</var>=<kbd>"http://example.org/"</kbd>, 
+				<pre><code>p.add(<var>url</var>=<kbd>"http://example.org/"</kbd>,
 		<var>description</var>=<kbd>"Example"</kbd>,
 		<var>extended</var>=<kbd>"An example site"</kbd>,
 		<var>tags</var>=<kbd>('computing', 'examples')</kbd>,
@@ -380,6 +380,12 @@ p["lastupdate_parsed"]</code></pre>
 					<dd>A string, tuple or list of tags to associate this post with.</dd>
 					<dt><var>date</var></dt>
 					<dd>A string, tuple, list, date or datetime on which this post should be registered as made.</dd>
+					<dt><var>toread</var></dt>
+					<dd>A string containing "yes" or "no" -Marks the bookmark as unread. Default is "no" </dd>
+					<dt><var>replace</var></dt>
+					<dd>A string containing "yes" or "no" - Replace any existing bookmark with this URL. Default is yes. If set to no, will throw an error if bookmark exists</dd>
+					<dt><var>shared</var></dt>
+					<dd>A string containing "yes" or "no" - Make bookmark public. Default is "yes" unless user has enabled the "save all bookmarks as private" user setting, in which case default is "no"</dd>
 				</dl>
 			</div>
 			<div id="bundle">
@@ -409,7 +415,7 @@ p["lastupdate_parsed"]</code></pre>
 				<pre><code>p.rename(<var>old</var>=<kbd>"blogging"</kbd>, <var>new</var>=<kbd>"weblogging"</kbd>)</code></pre>
 				<p>Rename the tag <var>old</var> to <var>new</var>.</p>
 			</div>
-			
+
 			<!-- <div id="license">
 				<h3>GNU Free Documentation License</h3>
 				<p>Version 1.2, November 2002</p>
@@ -517,7 +523,7 @@ p["lastupdate_parsed"]</code></pre>
 					<p>If you have Invariant Sections without Cover Texts, or some other combination of the three, merge those two alternatives to suit the situation.</p>
 					<p>If your document contains nontrivial examples of program code, we recommend releasing these examples in parallel under your choice of free software license, such as the GNU General Public License, to permit their use in free software.</p>
 				</div>
-				
+
 			</div> -->
 		</div>
 	</div>
