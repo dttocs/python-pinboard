@@ -477,10 +477,10 @@ class PinboardAccount(UserDict):
             if _debug:
                 sys.stderr.write("Post, %s (%s), added to pinboard.in\n" \
                         % (description, url))
-        except:
+        except Exception, e:
             if _debug:
-                sys.stderr.write("Unable to add post, %s (%s), to pinboard.in\n" \
-                        % (description, url))
+              sys.stderr.write("Unable to add post, %s (%s), to pinboard.in: %s\n" \
+                      % (description, url, e))
 
     def bundle(self, bundle, tags):
         """Bundle a set of tags together"""
