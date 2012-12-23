@@ -107,11 +107,10 @@ def connect(username=None, password=None, token=None):
 
 class PinboardError(Exception):
     """Error in the Python-Pinboard module"""
-    def __init__(self, url="", message=""):
-        self.url = url
+    def __init__(self, message=""):
         self.message = message
     def __str__(self):
-        return "%s: %s" % (self.url, self.message)
+        return "%s" % (self.message)
 
 class ThrottleError(PinboardError):
     """Error caused by pinboard.in throttling requests"""
@@ -123,7 +122,11 @@ class ThrottleError(PinboardError):
 
 class AddError(PinboardError):
     """Error adding a post to pinboard.in"""
-    pass
+    def __init__(self, url, message):
+        self.url = url
+        self.message = message
+    def __str__(self):
+        return "%s: %s" % (self.url, self.message)
 
 class DeleteError(PinboardError):
     """Error deleting a post from pinboard.in"""
@@ -490,64 +493,50 @@ class PinboardAccount(UserDict):
             query["tags"] = " ".join(tags)
         elif tags and isinstance(tags, StringTypes):
             query["tags"] = tags
-        try:
-            response = self.__request("%s/tags/bundles/set?%s" % (PINBOARD_API, \
-                    urllib.urlencode(query)))
-            if response.firstChild.getAttribute("code") != u"done":
-                raise BundleError
-            if _debug:
-                sys.stderr.write("Tags, %s, bundled into %s.\n" \
-                        % (repr(tags), bundle))
-        except:
-            if _debug:
-                sys.stderr.write("Unable to bundle tags, %s, into %s to pinboard.in\n" \
-                        % (repr(tags), bundle))
+
+        response = self.__request("%s/tags/bundles/set?%s" % (PINBOARD_API, \
+                urllib.urlencode(query)))
+        if response.firstChild.getAttribute("code") != u"done":
+            raise BundleError("Unable to bundle tags, %s, into %s to pinboard.in: %s\n" \
+                    % (repr(tags), bundle,response.firstChild.getAttribute("code")))
+        if _debug:
+            sys.stderr.write("Tags, %s, bundled into %s.\n" \
+                    % (repr(tags), bundle))
 
     def delete(self, url):
         """Delete post from pinboard.in by its URL"""
-        try:
-            response = self.__request("%s/posts/delete?%s" % (PINBOARD_API, \
-                    urllib.urlencode({"url":url})))
-            if response.firstChild.getAttribute("code") != u"done":
-                raise DeleteError
-            if _debug:
-                sys.stderr.write("Post, %s, deleted from pinboard.in\n" \
-                        % url)
-        except:
-            if _debug:
-                sys.stderr.write("Unable to delete post, %s, from pinboard.in\n" \
+        response = self.__request("%s/posts/delete?%s" % (PINBOARD_API, \
+                urllib.urlencode({"url":url})))
+        if response.firstChild.getAttribute("code") != u"done":
+            raise DeleteError("Unable to delete post, %s, from pinboard.in: %s\n" \
+                % (url.response.firstChild.getAttribute("code")))
+        if _debug:
+            sys.stderr.write("Post, %s, deleted from pinboard.in\n" \
                     % url)
 
     def delete_bundle(self, name):
         """Delete bundle from pinboard.in by its name"""
-        try:
-            response = self.__request("%s/tags/bundles/delete?%s" % (PINBOARD_API, \
-                    urllib.urlencode({"bundle":name})))
-            if response.firstChild.getAttribute("code") != u"done":
-                raise DeleteBundleError
-            if _debug:
-                sys.stderr.write("Bundle, %s, deleted from pinboard.in\n" \
-                        % name)
-        except:
-            if _debug:
-                sys.stderr.write("Unable to delete bundle, %s, from pinboard.in\n" \
+        response = self.__request("%s/tags/bundles/delete?%s" % (PINBOARD_API, \
+                urllib.urlencode({"bundle":name})))
+        if response.firstChild.getAttribute("code") != u"done":
+            raise DeleteBundleError("Unable to delete bundle, %s, from pinboard.in: %s\n" \
+                % (name,response.firstChild.getAttribute("code")))
+        if _debug:
+            sys.stderr.write("Bundle, %s, deleted from pinboard.in\n" \
                     % name)
 
     def rename_tag(self, old, new):
         """Rename a tag"""
         query = {"old":old, "new":new}
-        try:
-            response = self.__request("%s/tags/rename?%s" % (PINBOARD_API, \
-                    urllib.urlencode(query)))
-            if response.firstChild.getAttribute("code") != u"done":
-                raise RenameTagError
-            if _debug:
-                sys.stderr.write("Tag, %s, renamed to %s\n" \
-                        % (old, new))
-        except:
-            if _debug:
-                sys.stderr.write("Unable to rename %s tag to %s in pinboard.in\n" \
+        response = self.__request("%s/tags/rename?%s" % (PINBOARD_API, \
+                urllib.urlencode(query)))
+        if response.firstChild.getAttribute("code") != u"done":
+            raise RenameTagError("Unable to rename %s tag to %s in pinboard.in: %s\n" \
+                % (old, new, response.firstChild.getAttribute("code")))
+        if _debug:
+            sys.stderr.write("Tag, %s, renamed to %s\n" \
                     % (old, new))
+
 
 if __name__ == "__main__":
     if sys.argv[1:][0] == '-v' or sys.argv[1:][0] == '--version':
