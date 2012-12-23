@@ -473,18 +473,14 @@ class PinboardAccount(UserDict):
             query["dt"] = "%.4d-%.2d-%.2dT%.2d:%.2d:%.2dZ" % date.utctimetuple()[:6]
         elif date:
             query["dt"] = date
-        try:
-            response = self.__request("%s/posts/add?%s" % (PINBOARD_API, \
-                    urllib.urlencode(query)))
-            if response.firstChild.getAttribute("code") != u"done":
-                raise AddError(url,response.firstChild.getAttribute("code"))
-            if _debug:
-                sys.stderr.write("Post, %s (%s), added to pinboard.in\n" \
-                        % (description, url))
-        except Exception, e:
-            if _debug:
-              sys.stderr.write("Unable to add post, %s (%s), to pinboard.in: %s\n" \
-                      % (description, url, e))
+
+        response = self.__request("%s/posts/add?%s" % (PINBOARD_API, \
+                urllib.urlencode(query)))
+        if response.firstChild.getAttribute("code") != u"done":
+            raise AddError(url,response.firstChild.getAttribute("code"))
+        if _debug:
+            sys.stderr.write("Post, %s (%s), added to pinboard.in\n" \
+                    % (description, url))
 
     def bundle(self, bundle, tags):
         """Bundle a set of tags together"""
