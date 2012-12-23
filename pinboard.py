@@ -107,7 +107,11 @@ def connect(username=None, password=None, token=None):
 
 class PinboardError(Exception):
     """Error in the Python-Pinboard module"""
-    pass
+    def __init__(self, url="", message=""):
+        self.url = url
+        self.message = message
+    def __str__(self):
+        return "%s: %s" % (self.url, self.message)
 
 class ThrottleError(PinboardError):
     """Error caused by pinboard.in throttling requests"""
@@ -473,7 +477,7 @@ class PinboardAccount(UserDict):
             response = self.__request("%s/posts/add?%s" % (PINBOARD_API, \
                     urllib.urlencode(query)))
             if response.firstChild.getAttribute("code") != u"done":
-                raise AddError
+                raise AddError(url,response.firstChild.getAttribute("code"))
             if _debug:
                 sys.stderr.write("Post, %s (%s), added to pinboard.in\n" \
                         % (description, url))
