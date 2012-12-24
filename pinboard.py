@@ -129,6 +129,10 @@ class AddError(PinboardError):
     def __str__(self):
         return "%s: %s" % (self.url, self.message)
 
+class ExistsError(AddError):
+    """Error adding a post to pinboard.in because it already exists"""
+    pass
+
 class DeleteError(PinboardError):
     """Error deleting a post from pinboard.in"""
     pass
@@ -481,7 +485,10 @@ class PinboardAccount(UserDict):
         response = self.__request("%s/posts/add?%s" % (PINBOARD_API, \
                 urllib.urlencode(query)))
         if response.firstChild.getAttribute("code") != u"done":
-            raise AddError(url,response.firstChild.getAttribute("code"))
+            if response.firstChild.getAttribute("code") == u'item already exists':
+                raise ExistsError(url,response.firstChild.getAttribute("code"))
+            else:
+                raise AddError(url,response.firstChild.getAttribute("code"))
         if _debug:
             sys.stderr.write("Post, %s (%s), added to pinboard.in\n" \
                     % (repr(description), url))
